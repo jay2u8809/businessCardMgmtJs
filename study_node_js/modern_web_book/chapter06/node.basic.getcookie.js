@@ -11,23 +11,30 @@ http.createServer((req, res) => {
 
     if (cookie) {
 
-        let cookieData = cookie.split(';').map((element) => {
-            let elements = element.split(',');
+        let cookieData = cookie.split(';').map(f => {
+            let elements = f.split('=');
+            return {
+                key: elements[0],
+                value: elements[1]
+            };
         });
+
+        res.end('<h1>' + JSON.stringify(cookieData) + '</h1>');
+    } else {
+
+        // Set Cookie
+        res.writeHead(200, {
+            'Content-Type': 'text/html',
+            'Set-Cookie': [
+                'name = RintIanTta',
+                'region = Seoul'
+            ]
+        });
+
+        // response
+        res.end('<h1>クッキーを生成しました。</h1>');
     }
 
-    // Set Cookie
-    res.writeHead(200, {
-        'Content-Type': 'text/html',
-        'Set-Cookie': [
-            'name = RintIanTta',
-            'region = Seoul'
-        ]
-    });
-
-    // response
-    res.end('<h1>' + JSON.stringify(cookie) + '</h1>');
-
-}).listen(52273, () => {
+    }).listen(52273, () => {
    console.log('Server Running Port Number : 52273');
 });
