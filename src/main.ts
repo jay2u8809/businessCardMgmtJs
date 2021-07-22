@@ -10,7 +10,6 @@ async function bootstrap() {
       AppModule,
   );
 
-  // app.setGlobalPrefix('api');
   app.useStaticAssets(join(__dirname, '..', clientRootPath + 'public'));
   app.setBaseViewsDir(join(__dirname, '..', clientRootPath + 'views'));
   app.setViewEngine('hbs');
