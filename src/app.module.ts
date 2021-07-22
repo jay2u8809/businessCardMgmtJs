@@ -1,17 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { join } from 'path';
+import { ImageocrController } from './imageocr/imageocr.controller';
+import { ImageocrService } from './imageocr/imageocr.service';
+import { ImageocrModule } from './imageocr/imageocr.module';
 
 @Module({
   imports: [
-      // ServeStaticModule.forRoot({
-      //   rootPath: join(__dirname, '..', 'client/templates'),
-      //   exclude: ['/api*'],
-      // }),
+    ImageocrModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ImageocrController],
+  providers: [AppService, ImageocrService],
 })
 export class AppModule {}
